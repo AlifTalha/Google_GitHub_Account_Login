@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Login Page";
+}
+
+<h2>Login Options</h2>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <p>Welcome, @User.Identity.Name</p>
+    <a class="btn btn-danger" asp-action="Logout">Logout</a>
+}
+else
+{
+    <h4>User Input</h4>
+    <form method="post" asp-action="Index">
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" name="name" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="email" class="form-control" required />
+        </div>
+        <br />
+        <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+
+    <hr />
+
+    <h4>OR</h4>
+    <div class="d-flex gap-2">
+        <a class="btn btn-primary" asp-action="LoginWithGoogle">
+            <i class="bi bi-google"></i> Login with Google
+        </a>
+        <a class="btn btn-dark" asp-action="LoginWithGitHub">
+            <i class="bi bi-github"></i> Login with GitHub
+        </a>
+    </div>
+}
+
+@if (ViewBag.Message != null)
+{
+    <p style="color: green;">@ViewBag.Message</p>
+}
